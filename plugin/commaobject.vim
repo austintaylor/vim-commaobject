@@ -6,6 +6,11 @@
 "   This text object supports manipulating comma-delimited lists, such as
 "   argument lists, array literals, and hash literals.
 
+if (exists("g:loaded_commaobject" && g:loaded_commaobject)
+  finish
+endif
+let g:loaded_commaobject = 1
+
 onoremap <silent>a, :<C-u>call CommaTextObject(0)<CR>
 onoremap <silent>i, :<C-u>call CommaTextObject(1)<CR>
 vnoremap <silent>a, :<C-u>call CommaTextObject(0)<CR><Esc>gv
