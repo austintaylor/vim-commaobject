@@ -32,5 +32,4 @@ To Do
 - Handle first arguments in method calls without parentheses.
 - Handle last arguments in method calls without parentheses that do not have `` do`` on the end.
 - Handle lists spanning lines.
-- Handle strings containing commas, or other significant characters.
 - Handle nested method calls: ``["one", obj.meth|od("two", "three")]``

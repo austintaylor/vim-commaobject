@@ -16,22 +16,29 @@ onoremap <silent>i, :<C-u>call CommaTextObject(1)<CR>
 vnoremap <silent>a, :<C-u>call CommaTextObject(0)<CR><Esc>gv
 vnoremap <silent>i, :<C-u>call CommaTextObject(1)<CR><Esc>gv
 
+function! s:find(pattern, flags)
+  let found = search(a:pattern, a:flags, line("."))
+  while found && (synIDattr(synID(line("."), col("."), 0), "name") =~? "string\\|comment")
+    let found = search(a:pattern, a:flags, line("."))
+  endwhile
+
+  return found
+endfunction
+
 function! CommaTextObject(inner)
-  let found = search(",", "bc", line("."))
+  let found = s:find(",", "b")
   if !found
-    let found = search("(", "bc", line("."))
-    if !found
-      let found = search("[", "bc", line("."))
-    endif
+    " Try to identify it as the first item in the list
+    let found = s:find("(\\|[", "b")
     if found
       normal! lv
       if a:inner
-        let found = search(",", "", line("."))
+        let found = s:find(",", "")
         normal! h
       else
-        let found = search(", ", "e", line("."))
+        let found = s:find(", ", "e")
         if !found
-          let found = search(",", "", line("."))
+          let found = s:find(",", "")
         endif
       endif
     endif
@@ -40,18 +47,11 @@ function! CommaTextObject(inner)
       normal! w
     endif
     normal! v
-    let found = search(",", "", line("."))
+    let found = s:find(",", "")
     if !found
-      let found = search(")", "", line("."))
-    endif
-    if !found
-      let found = search("]", "", line("."))
-    endif
-    if !found
-      let found = search(" do", "", line("."))
+      let found = s:find(")\\|]\\| do", "")
     endif
     normal! h
   endif
 endfunction
-
 
