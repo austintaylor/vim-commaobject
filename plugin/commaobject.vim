@@ -58,13 +58,7 @@ function! CommaTextObject(inner)
       normal! w
     endif
     normal! v
-    let found = s:find(",", "")
-    if !found
-      let found = s:find(")\\|]\\|}\\| do\\>", "")
-    endif
-    if !found
-      normal! $
-    endif
+    let found = s:find(",\\|)\\|]\\|}\\| do\\>", "")
     normal! h
   else
     normal! lv
