@@ -29,7 +29,7 @@ Another example:
 
 There is support for ``()``, ``[]``, and ``{}`` enclosed lists.
 
-There is support for lists ending in `` do``, indicating a Ruby method without parentheses.
+There is also support for lists ending with ``do``, indicating a Ruby method without parentheses.
 
 To do
 =====
