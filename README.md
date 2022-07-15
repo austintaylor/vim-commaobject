@@ -22,7 +22,7 @@ Another example:
 
     ci,
 
-    ["one, , "three"]
+    ["one", , "three"]
            ^
 
 ``i,`` will only select the contents.
